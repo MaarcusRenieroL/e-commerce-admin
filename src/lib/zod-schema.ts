@@ -49,3 +49,13 @@ export const loginSchema = z.object({
       message: "Password must be at least 6 characters long",
     }),
 });
+
+export const storeSchema = z.object({
+  name: z
+    .string({
+      required_error: "Store name is required",
+    })
+    .min(4, {
+      message: "Store name should be at least 4 characters long",
+    }),
+});
