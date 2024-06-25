@@ -341,7 +341,7 @@ export const productRouter = router({
     .mutation(async ({ ctx, input }) => {
       try {
         const { userId } = ctx;
-        const { storeId, productId } = input;
+        const { productId } = input;
 
         const loggedInUser = await db.user.findFirst({
           where: {
@@ -356,23 +356,9 @@ export const productRouter = router({
           });
         }
 
-        const store = await db.store.findFirst({
-          where: {
-            storeId: storeId,
-          },
-        });
-
-        if (!store) {
-          throw new TRPCError({
-            code: "NOT_FOUND",
-            message: "Store not found",
-          });
-        }
-
         const existingProduct = await db.product.findFirst({
           where: {
             productId: productId,
-            storeId: storeId,
           },
         });
 

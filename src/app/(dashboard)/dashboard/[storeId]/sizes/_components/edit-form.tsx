@@ -96,7 +96,7 @@ export const EditSizeForm: FC<Props> = ({
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={() => {
-          handleDelete({ sizeId: size?.sizeId ?? "", storeId: storeId });
+          handleDelete({ sizeId: size?.sizeId ?? "" });
           router.push(`/dashboard/${storeId}/sizes`);
           router.refresh();
         }}

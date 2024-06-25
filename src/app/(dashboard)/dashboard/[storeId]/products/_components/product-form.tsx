@@ -6,11 +6,7 @@ import { CreateProductForm } from "./create-form";
 import { EditProductForm } from "./edit-form";
 
 type Props = {
-  product: Product & {
-    category: Category
-    size: Size
-    color: Color
-  };
+  product: any;
   categories: Category[];
   sizes: Size[];
   colors: Color[];

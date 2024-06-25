@@ -3,6 +3,8 @@ import { DashboardStoreModal } from "~/components/modal/dashboard-modal";
 import { getServerAuthSession } from "~/lib/auth";
 import { db } from "~/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const session = await getServerAuthSession();
 

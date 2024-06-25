@@ -141,9 +141,9 @@ export default function SignInPage() {
           </Form>
         </CardContent>
         <CardFooter className="p-0 flex items-center justify-center w-full mt-5">
-          Don't have an account?{" "}
+          Don&apos;t have an account?
           <span className="ml-3">
-            <Link href="/sign-up">
+            <Link href="/auth/sign-up">
               <Button variant="link" className="hover:underline">
                 Sign up
               </Button>

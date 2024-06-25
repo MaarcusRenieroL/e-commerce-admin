@@ -205,7 +205,7 @@ export const sizeRouter = router({
     .mutation(async ({ ctx, input }) => {
       try {
         const { userId } = ctx;
-        const { sizeId, storeId } = input;
+        const { sizeId } = input;
 
         const loggedInUser = await db.user.findFirst({
           where: {
@@ -223,7 +223,6 @@ export const sizeRouter = router({
         const size = await db.size.findFirst({
           where: {
             sizeId: sizeId,
-            storeId: storeId,
           },
         });
 
@@ -237,7 +236,6 @@ export const sizeRouter = router({
         const deletedSize = await db.size.delete({
           where: {
             sizeId: sizeId,
-            storeId: storeId,
           },
         });
 

@@ -205,7 +205,7 @@ export const colorRouter = router({
     .mutation(async ({ ctx, input }) => {
       try {
         const { userId } = ctx;
-        const { colorId, storeId } = input;
+        const { colorId } = input;
 
         const loggedInUser = await db.user.findFirst({
           where: {
@@ -223,7 +223,6 @@ export const colorRouter = router({
         const color = await db.color.findFirst({
           where: {
             colorId: colorId,
-            storeId: storeId,
           },
         });
 
@@ -237,7 +236,6 @@ export const colorRouter = router({
         const deletedColor = await db.color.delete({
           where: {
             colorId: colorId,
-            storeId: storeId,
           },
         });
 

@@ -44,37 +44,30 @@ export const EditCategoryForm: FC<Props> = ({
   storeId,
   billboards,
 }) => {
-  if (!category) {
-    return;
-  }
-
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof updateCategorySchema>>({
     resolver: zodResolver(updateCategorySchema),
     defaultValues: {
-      categoryId: category.categoryId,
-      categoryLabel: category.categoryLabel,
-      storeId: category.storeId,
-      billboardName: billboards.find(
-        (billboard) => billboard.billboardId === category.billboardId,
-      )?.billboardLabel,
+      categoryId: category?.categoryId || "",
+      categoryLabel: category?.categoryLabel || "",
+      storeId: category?.storeId || storeId,
+      billboardName:
+        billboards.find(
+          (billboard) => billboard.billboardId === category?.billboardId,
+        )?.billboardLabel || "",
     },
   });
 
   const { mutateAsync: updateCategory } =
     client.category.updateCategory.useMutation({
       onSuccess: () => {
-        toast("Success", {
-          description: "Category created successfully",
-        });
+        toast("Success", { description: "Category updated successfully" });
       },
       onError: () => {
-        toast("Error", {
-          description: "Error creating category",
-        });
+        toast("Error", { description: "Error updating category" });
       },
     });
 
@@ -82,7 +75,6 @@ export const EditCategoryForm: FC<Props> = ({
     data: z.infer<typeof updateCategorySchema>,
   ) => {
     setLoading(true);
-    console.log(data);
     await updateCategory(data);
     setLoading(false);
     router.push(`/dashboard/${storeId}/categories`);
@@ -91,20 +83,20 @@ export const EditCategoryForm: FC<Props> = ({
   const { mutateAsync: deleteCategory } =
     client.category.deleteCategory.useMutation({
       onSuccess: () => {
-        toast("Success", {
-          description: "Category created successfully",
-        });
+        toast("Success", { description: "Category deleted successfully" });
       },
       onError: () => {
-        toast("Error", {
-          description: "Error creating category",
-        });
+        toast("Error", { description: "Error deleting category" });
       },
     });
 
   const handleDelete = async (data: z.infer<typeof deleteCategorySchema>) => {
     await deleteCategory(data);
   };
+
+  if (!category) {
+    return <div>No category selected</div>;
+  }
 
   return (
     <>
@@ -176,14 +168,14 @@ export const EditCategoryForm: FC<Props> = ({
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category Label</FormLabel>
+                  <FormLabel>Billboard</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select Role" />
+                        <SelectValue placeholder="Select Billboard" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup defaultValue="">

@@ -190,7 +190,6 @@ export const updateSizeSchema = z.object({
 
 export const deleteSizeSchema = z.object({
   sizeId: z.string(),
-  storeId: z.string(),
 });
 
 export const getColorSchema = z.object({
@@ -237,7 +236,6 @@ export const updateColorSchema = z.object({
 
 export const deleteColorSchema = z.object({
   colorId: z.string(),
-  storeId: z.string(),
 });
 
 export const getProductSchema = z.object({
@@ -298,5 +296,4 @@ export const updateProductSchema = z.object({
 
 export const deleteProductSchema = z.object({
   productId: z.string(),
-  storeId: z.string(),
 });

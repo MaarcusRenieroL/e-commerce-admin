@@ -54,27 +54,29 @@ export const EditProductForm: FC<Props> = ({
   sizes,
   colors,
 }) => {
-  if (!product) {
-    return;
-  }
-
   const [loading, setLoading] = useState(false);
-  const [imageArray, setImageArray] = useState<string[]>(product.images ?? "");
+  const [imageArray, setImageArray] = useState<string[]>(product?.images ?? []);
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof updateProductSchema>>({
     resolver: zodResolver(updateProductSchema),
-    defaultValues: {
-      name: product.productName,
-      images: imageArray.map((image) => image),
-      price: String(product.price),
-      categoryName: product.category.categoryLabel,
-      sizeName: product.size.name,
-      colorName: product.color.name,
-      storeId: storeId,
-    },
+    defaultValues: product
+      ? {
+          name: product.productName,
+          images: imageArray,
+          price: String(product.price),
+          categoryName: product.category.categoryLabel,
+          sizeName: product.size.name,
+          colorName: product.color.name,
+          storeId: storeId,
+        }
+      : {},
   });
+
+  if (!product) {
+    return null;
+  }
 
   const { mutateAsync: updateProduct } =
     client.product.updateProduct.useMutation({
@@ -94,7 +96,7 @@ export const EditProductForm: FC<Props> = ({
     data: z.infer<typeof updateProductSchema>,
   ) => {
     setLoading(true);
-    data.images = imageArray.map((image) => image);
+    data.images = imageArray;
     console.log(data);
     const product = await updateProduct(data);
     setLoading(false);
@@ -125,7 +127,7 @@ export const EditProductForm: FC<Props> = ({
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={() => {
-          handleDelete({ productId: product.productId, storeId: storeId });
+          handleDelete({ productId: product.productId });
           router.push(`/dashboard/${storeId}/products`);
           router.refresh();
         }}

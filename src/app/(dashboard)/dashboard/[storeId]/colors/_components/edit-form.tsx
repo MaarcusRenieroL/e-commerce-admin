@@ -26,14 +26,10 @@ import type { Color } from "@prisma/client";
 
 type Props = {
   storeId: string;
-  color: Color
+  color: Color;
 };
 
-export const EditColorForm: FC<Props> = ({
-  storeId,
-  color
-}) => {
-
+export const EditColorForm: FC<Props> = ({ storeId, color }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -47,19 +43,18 @@ export const EditColorForm: FC<Props> = ({
     },
   });
 
-  const { mutateAsync: updateColor } =
-    client.color.updateColor.useMutation({
-      onSuccess: () => {
-        toast("Success", {
-          description: "Color updated successfully",
-        });
-      },
-      onError: () => {
-        toast("Error", {
-          description: "Error updated category",
-        });
-      },
-    });
+  const { mutateAsync: updateColor } = client.color.updateColor.useMutation({
+    onSuccess: () => {
+      toast("Success", {
+        description: "Color updated successfully",
+      });
+    },
+    onError: () => {
+      toast("Error", {
+        description: "Error updated category",
+      });
+    },
+  });
 
   const handleUpdateCategory = async (
     data: z.infer<typeof updateColorSchema>,
@@ -71,19 +66,18 @@ export const EditColorForm: FC<Props> = ({
     router.push(`/dashboard/${storeId}/colors/${color.colorId}`);
   };
 
-  const { mutateAsync: deleteColor } =
-    client.color.deleteColor.useMutation({
-      onSuccess: () => {
-        toast("Success", {
-          description: "Color deleted successfully",
-        });
-      },
-      onError: () => {
-        toast("Error", {
-          description: "Error deleting category",
-        });
-      },
-    });
+  const { mutateAsync: deleteColor } = client.color.deleteColor.useMutation({
+    onSuccess: () => {
+      toast("Success", {
+        description: "Color deleted successfully",
+      });
+    },
+    onError: () => {
+      toast("Error", {
+        description: "Error deleting category",
+      });
+    },
+  });
 
   const handleDelete = async (data: z.infer<typeof deleteColorSchema>) => {
     await deleteColor(data);
@@ -95,7 +89,7 @@ export const EditColorForm: FC<Props> = ({
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={() => {
-          handleDelete({ colorId: color?.colorId ?? "", storeId: storeId });
+          handleDelete({ colorId: color?.colorId ?? "" });
           router.push(`/dashboard/${storeId}/colors`);
           router.refresh();
         }}
@@ -161,14 +155,17 @@ export const EditColorForm: FC<Props> = ({
                 <FormItem>
                   <FormLabel>Color Value</FormLabel>
                   <FormControl>
-                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4">
                       <Input
                         placeholder="Enter color value"
                         type="text"
                         {...field}
                         disabled={loading}
                       />
-                      <div className="ml-2 p-4 border rounded-full" style={{ backgroundColor: field.value }} />
+                      <div
+                        className="ml-2 p-4 border rounded-full"
+                        style={{ backgroundColor: field.value }}
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
