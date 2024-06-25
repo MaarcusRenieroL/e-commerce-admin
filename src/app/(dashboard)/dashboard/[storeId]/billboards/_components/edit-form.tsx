@@ -22,9 +22,10 @@ import {
 import { Input } from "~/components/ui/input";
 import { Separator } from "~/components/ui/separator";
 import { client } from "~/lib/trpc/client";
-import { updateBillboardSchema } from "~/lib/zod-schema";
+import { deleteBillboardSchema, updateBillboardSchema } from "~/lib/zod-schema";
 import { Label } from "@radix-ui/react-label";
 import Image from "next/image";
+import { AlertModal } from "~/components/modal/alert-modal";
 
 type Props = {
   billboard: Billboard | null;
@@ -34,6 +35,7 @@ type Props = {
 export const EditBillboardForm: FC<Props> = ({ billboard, storeId }) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(billboard?.imageUrl ?? "");
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof updateBillboardSchema>>({
@@ -71,13 +73,45 @@ export const EditBillboardForm: FC<Props> = ({ billboard, storeId }) => {
     router.push(`/dashboard/${storeId}/billboards`);
   };
 
+  const { mutateAsync: deleteBillboard } =
+    client.billboard.deleteBillboard.useMutation({
+      onSuccess: () => {
+        toast("Success", {
+          description: "Billboard created successfully",
+        });
+      },
+      onError: () => {
+        toast("Error", {
+          description: "Error creating billboard",
+        });
+      },
+    });
+
+  const handleDelete = async (data: z.infer<typeof deleteBillboardSchema>) => {
+    await deleteBillboard(data);
+  };
+
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => {
+          handleDelete({ billboardId: billboard?.billboardId ?? "" });
+          router.push(`/dashboard/${storeId}/billboards`);
+          router.refresh();
+        }}
+        loading={loading}
+      />
       <div className="w-full flex items-center justify-between">
         <Heading
           title="Edit billboard"
           description="Fill the form to edit a billboard"
         />
+        <Button variant="destructive" size="sm" onClick={() => setOpen(true)}>
+          <Trash className="mr-2 h-4 w-4" />
+          Delete Billboard
+        </Button>
       </div>
       <Separator className="my-5" />
       <Form {...form}>
@@ -161,7 +195,7 @@ export const EditBillboardForm: FC<Props> = ({ billboard, storeId }) => {
             />
           </div>
           <Button disabled={loading} className="ml-auto" type="submit">
-            Create billboard
+            Update billboard
           </Button>
         </form>
       </Form>

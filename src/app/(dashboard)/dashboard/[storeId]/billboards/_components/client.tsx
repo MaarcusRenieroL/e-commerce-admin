@@ -2,12 +2,13 @@
 
 import { Billboard } from "@prisma/client";
 import { Plus } from "lucide-react";
-import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { FC } from "react";
+import { DataTable } from "~/components/data-table";
 import { Heading } from "~/components/heading";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
+import { columns } from "./columns";
 
 type Props = {
   billboards: Billboard[];
@@ -21,7 +22,7 @@ export const BillboardClient: FC<Props> = ({ billboards }) => {
     <div>
       <div className="flex items-center justify-between w-full">
         <Heading
-          title="Billboards (0)"
+          title={`Billboards (${billboards.length})`}
           description="Manage billboards for your store"
         />
         <Button
@@ -34,7 +35,12 @@ export const BillboardClient: FC<Props> = ({ billboards }) => {
         </Button>
       </div>
       <Separator className="my-5" />
-      <div></div>
+      <DataTable
+        data={billboards}
+        columns={columns}
+        searchColumnName="billboardLabel"
+        placeholder="Search billboards"
+      />
     </div>
   );
 };
