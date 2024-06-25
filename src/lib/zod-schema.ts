@@ -111,3 +111,37 @@ export const updateBillboardSchema = z.object({
 export const deleteBillboardSchema = z.object({
   billboardId: z.string(),
 });
+
+export const getCategoriesSchema = z.object({
+  storeId: z.string(),
+  billboardId: z.string(),
+});
+
+export const categorySchema = z.object({
+  categoryLabel: z
+    .string({
+      required_error: "Category label name is required",
+    })
+    .min(4, {
+      message: "Category label name must at least be 4 characters long",
+    }),
+  storeId: z.string(),
+  billboardName: z.string(),
+});
+
+export const updateCategorySchema = z.object({
+  categoryId: z.string(),
+  categoryLabel: z
+    .string({
+      required_error: "Category label name is required",
+    })
+    .min(4, {
+      message: "Category label name must at least be 4 characters long",
+    }),
+  storeId: z.string(),
+  billboardName: z.string(),
+});
+
+export const deleteCategorySchema = z.object({
+  categoryId: z.string(),
+});

@@ -10,6 +10,10 @@ export const ROUTES: Routes[] = [
     href: "/billboards",
   },
   {
+    title: "Categories",
+    href: "/categories",
+  },
+  {
     title: "Settings",
     href: "/settings",
   },
