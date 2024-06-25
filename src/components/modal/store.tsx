@@ -20,9 +20,11 @@ import { Input } from "~/components/ui/input";
 import { client } from "~/lib/trpc/client";
 import { toast } from "sonner";
 import { Button } from "~/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export const StoreModal: FC = () => {
   const store = useStoreModal();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof storeSchema>>({
     resolver: zodResolver(storeSchema),
@@ -46,7 +48,8 @@ export const StoreModal: FC = () => {
   });
 
   const handleAddStore = async (data: z.infer<typeof storeSchema>) => {
-    await createStore(data);
+    const store = await createStore(data);
+    router.push(`/dashboard/${store.data.storeId}`);
   };
 
   return (

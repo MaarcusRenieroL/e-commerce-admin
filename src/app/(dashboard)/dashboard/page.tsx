@@ -1,21 +1,24 @@
-"use client";
+import { redirect } from "next/navigation";
+import { DashboardStoreModal } from "~/components/modal/dashboard-modal";
+import { getServerAuthSession } from "~/lib/auth";
+import { db } from "~/lib/db";
 
-import { useEffect } from "react";
-import { useStoreModal } from "~/hooks/use-store-modal";
+export default async function Page() {
+  const session = await getServerAuthSession();
 
-export default function Page() {
-  const onOpen = useStoreModal((state) => state.onOpen);
-  const isOpen = useStoreModal((state) => state.isOpen);
+  if (!session) {
+    return;
+  }
 
-  useEffect(() => {
-    if (!isOpen) {
-      onOpen();
-    }
-  }, [isOpen, onOpen]);
+  const store = await db.store.findFirst({
+    where: {
+      userId: session.user.id,
+    },
+  });
 
-  return (
-    <div>
-      <h1>Root page</h1>
-    </div>
-  );
+  if (store) {
+    redirect(`/dashboard/${store.storeId}`);
+  }
+
+  return <DashboardStoreModal />;
 }
