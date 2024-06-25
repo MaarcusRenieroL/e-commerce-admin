@@ -57,6 +57,7 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     billboardId: false,
     categoryId: false,
+    sizeId: false,
   });
   const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({

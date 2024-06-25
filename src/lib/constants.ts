@@ -14,6 +14,10 @@ export const ROUTES: Routes[] = [
     href: "/categories",
   },
   {
+    title: "Sizes",
+    href: "/sizes",
+  },
+  {
     title: "Settings",
     href: "/settings",
   },

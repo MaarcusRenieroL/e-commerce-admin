@@ -145,3 +145,50 @@ export const updateCategorySchema = z.object({
 export const deleteCategorySchema = z.object({
   categoryId: z.string(),
 });
+
+export const getSizeSchema = z.object({
+  storeId: z.string(),
+  billboardId: z.string(),
+});
+
+export const sizeSchema = z.object({
+  storeId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(4, {
+      message: "Name must be at least 4 characters long",
+    }),
+  value: z
+    .string({
+      required_error: "Value is required",
+    })
+    .min(1, {
+      message: "Value must be at least 1 character long",
+    }),
+});
+
+export const updateSizeSchema = z.object({
+  storeId: z.string(),
+  sizeId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(4, {
+      message: "Name must be at least 4 characters long",
+    }),
+  value: z
+    .string({
+      required_error: "Value is required",
+    })
+    .min(1, {
+      message: "Value must be at least 1 character long",
+    }),
+});
+
+export const deleteSizeSchema = z.object({
+  sizeId: z.string(),
+  storeId: z.string(),
+});

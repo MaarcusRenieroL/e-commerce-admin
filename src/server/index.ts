@@ -5,12 +5,14 @@ import { userRouter } from "./routers/users";
 import { storeRouter } from "./routers/store";
 import { billboardRouter } from "./routers/billboard";
 import { categoryRouter } from "./routers/category";
+import { sizeRouter } from "./routers/size";
 
 export const appRouter = router({
   user: userRouter,
   store: storeRouter,
   billboard: billboardRouter,
   category: categoryRouter,
+  size: sizeRouter,
 });
 
 export type AppRouter = typeof appRouter;
