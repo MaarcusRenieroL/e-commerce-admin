@@ -192,3 +192,51 @@ export const deleteSizeSchema = z.object({
   sizeId: z.string(),
   storeId: z.string(),
 });
+
+
+export const getColorSchema = z.object({
+  storeId: z.string(),
+  billboardId: z.string(),
+});
+
+export const colorSchema = z.object({
+  storeId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(3, {
+      message: "Name must be at least 3 characters long",
+    }),
+  value: z
+    .string({
+      required_error: "Value is required",
+    })
+    .min(1, {
+      message: "Value must be at least 1 character long",
+    }),
+});
+
+export const updateColorSchema = z.object({
+  storeId: z.string(),
+  colorId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(4, {
+      message: "Name must be at least 4 characters long",
+    }),
+  value: z
+    .string({
+      required_error: "Value is required",
+    })
+    .min(1, {
+      message: "Value must be at least 1 character long",
+    }),
+});
+
+export const deleteColorSchema = z.object({
+  colorId: z.string(),
+  storeId: z.string(),
+});

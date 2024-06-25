@@ -58,6 +58,7 @@ export function DataTable<TData, TValue>({
     billboardId: false,
     categoryId: false,
     sizeId: false,
+    colorId: false,
   });
   const [rowSelection, setRowSelection] = useState({});
   const table = useReactTable({

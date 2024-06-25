@@ -18,6 +18,10 @@ export const ROUTES: Routes[] = [
     href: "/sizes",
   },
   {
+    title: "Colors",
+    href: "/colors"
+  },
+  {
     title: "Settings",
     href: "/settings",
   },
