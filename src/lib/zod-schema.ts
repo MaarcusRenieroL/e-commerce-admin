@@ -59,3 +59,18 @@ export const storeSchema = z.object({
       message: "Store name should be at least 4 characters long",
     }),
 });
+
+export const settingsFormSchema = z.object({
+  storeId: z.string(),
+  storeName: z
+    .string({
+      required_error: "Store name is required",
+    })
+    .min(4, {
+      message: "Store name should at least be 4 characters long",
+    }),
+});
+
+export const deleteStoreSchema = z.object({
+  storeId: z.string(),
+});
