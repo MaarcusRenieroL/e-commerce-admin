@@ -22,6 +22,10 @@ export const ROUTES: Routes[] = [
     href: "/colors"
   },
   {
+    title: "Products",
+    href: "/products"
+  },
+  {
     title: "Settings",
     href: "/settings",
   },

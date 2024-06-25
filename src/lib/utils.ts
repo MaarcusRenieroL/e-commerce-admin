@@ -11,5 +11,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "INR",
+});
+
 export const UploadButton = generateUploadButton<FileRouter>();
 export const UploadDropzone = generateUploadDropzone<FileRouter>();

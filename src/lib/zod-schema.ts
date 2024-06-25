@@ -193,7 +193,6 @@ export const deleteSizeSchema = z.object({
   storeId: z.string(),
 });
 
-
 export const getColorSchema = z.object({
   storeId: z.string(),
   billboardId: z.string(),
@@ -238,5 +237,66 @@ export const updateColorSchema = z.object({
 
 export const deleteColorSchema = z.object({
   colorId: z.string(),
+  storeId: z.string(),
+});
+
+export const getProductSchema = z.object({
+  storeId: z.string(),
+});
+
+export const productSchema = z.object({
+  storeId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(3, {
+      message: "Name must be at least 3 characters long",
+    }),
+  images: z.array(z.string(), {
+    required_error: "Image is required",
+  }),
+  price: z.string({
+    required_error: "Price is required",
+  }),
+  categoryName: z.string({
+    required_error: "Category is required",
+  }),
+  sizeName: z.string({
+    required_error: "Size is required",
+  }),
+  colorName: z.string({
+    required_error: "Color is required",
+  }),
+});
+
+export const updateProductSchema = z.object({
+  storeId: z.string(),
+  name: z
+    .string({
+      required_error: "Name is required",
+    })
+    .min(3, {
+      message: "Name must be at least 3 characters long",
+    }),
+  images: z.array(z.string(), {
+    required_error: "Image is required",
+  }),
+  price: z.string({
+    required_error: "Price is required",
+  }),
+  categoryName: z.string({
+    required_error: "Category is required",
+  }),
+  sizeName: z.string({
+    required_error: "Size is required",
+  }),
+  colorName: z.string({
+    required_error: "Color is required",
+  }),
+});
+
+export const deleteProductSchema = z.object({
+  productId: z.string(),
   storeId: z.string(),
 });

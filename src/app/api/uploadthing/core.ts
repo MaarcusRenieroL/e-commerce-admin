@@ -5,7 +5,7 @@ import { getServerAuthSession } from "~/lib/auth";
 const f = createUploadthing();
 
 export const fileRouter = {
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 5 } })
     .middleware(async ({ req }) => {
       const user = await getServerAuthSession();
 

@@ -7,6 +7,7 @@ import { billboardRouter } from "./routers/billboard";
 import { categoryRouter } from "./routers/category";
 import { sizeRouter } from "./routers/size";
 import { colorRouter } from "./routers/color";
+import { productRouter } from "./routers/product";
 
 export const appRouter = router({
   user: userRouter,
@@ -14,7 +15,8 @@ export const appRouter = router({
   billboard: billboardRouter,
   category: categoryRouter,
   size: sizeRouter,
-  color: colorRouter
+  color: colorRouter,
+  product: productRouter
 });
 
 export type AppRouter = typeof appRouter;
