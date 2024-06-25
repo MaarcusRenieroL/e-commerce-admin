@@ -7,7 +7,7 @@ export default function StoreApiPage({
   params: { storeId: string };
 }) {
   return (
-    <div className="w-full p-10">
+    <div className="w-full">
       <Heading
         title="API"
         description="List of all APIs accessed by different users"

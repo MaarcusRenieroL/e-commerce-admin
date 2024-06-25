@@ -6,6 +6,10 @@ export const ROUTES: Routes[] = [
     href: "/",
   },
   {
+    title: "Billboards",
+    href: "/billboards",
+  },
+  {
     title: "APIs",
     href: "/api",
   },

@@ -22,11 +22,5 @@ export default async function StoreSettingsPage({ params }: Props) {
     return null;
   }
 
-  return (
-    <div className="flex-col">
-      <div className="flex-1 space-y-4 p-10">
-        <SettingsForm store={store} />
-      </div>
-    </div>
-  );
+  return <SettingsForm store={store} />;
 }

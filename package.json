@@ -27,6 +27,7 @@
     "@trpc/next": "11.0.0-rc.421",
     "@trpc/react-query": "11.0.0-rc.421",
     "@trpc/server": "11.0.0-rc.421",
+    "@uploadthing/react": "^6.6.0",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -43,6 +44,7 @@
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^6.12.0",
     "zod": "^3.23.8",
     "zustand": "^4.5.2"
   },

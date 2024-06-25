@@ -6,7 +6,7 @@ import {
 import { privateProcedure, router } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { db } from "~/lib/db";
-import { getStore, getStoreByStoreName } from "~/lib/helpers";
+import { getStore } from "~/lib/helpers";
 
 export const storeRouter = router({
   getStores: privateProcedure.query(async ({ ctx }) => {

@@ -74,3 +74,40 @@ export const settingsFormSchema = z.object({
 export const deleteStoreSchema = z.object({
   storeId: z.string(),
 });
+
+export const getBillboardSchema = z.object({
+  storeId: z.string(),
+});
+
+export const billboardSchema = z.object({
+  billboardLabel: z
+    .string({
+      required_error: "Billboard label name is required",
+    })
+    .min(4, {
+      message: "Billboard label name must at least be 4 characters long",
+    }),
+  imageUrl: z.string({
+    required_error: "Image URL is requred",
+  }),
+  storeId: z.string(),
+});
+
+export const updateBillboardSchema = z.object({
+  billboardId: z.string(),
+  billboardLabel: z
+    .string({
+      required_error: "Billboard label name is required",
+    })
+    .min(4, {
+      message: "Billboard label name must at least be 4 characters long",
+    }),
+  imageUrl: z.string({
+    required_error: "Image URL is requred",
+  }),
+  storeId: z.string(),
+});
+
+export const deleteBillboardSchema = z.object({
+  billboardId: z.string(),
+});
