@@ -4,6 +4,45 @@ import { TRPCError } from "@trpc/server";
 import { db } from "~/lib/db";
 
 export const storeRouter = router({
+  getStores: privateProcedure.query(async ({ ctx }) => {
+    try {
+      const { userId } = ctx;
+
+      const loggedInUser = await db.user.findFirst({
+        where: {
+          id: userId,
+        },
+      });
+
+      if (!loggedInUser) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "User must log in",
+        });
+      }
+
+      const stores = await db.store.findMany({
+        where: {
+          userId: userId,
+        },
+      });
+
+      if (!stores) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "No stores found",
+        });
+      }
+
+      return stores;
+    } catch (error) {
+      console.log(error);
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Something went wrong",
+      });
+    }
+  }),
   addStore: privateProcedure
     .input(storeSchema)
     .mutation(async ({ ctx, input }) => {
