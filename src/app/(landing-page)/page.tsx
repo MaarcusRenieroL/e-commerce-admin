@@ -1,10 +1,17 @@
-import { Button } from "~/components/ui/button";
+import { AboutSection } from "~/components/landing-page/about-section";
+import { FeatureSection } from "~/components/landing-page/feature-section";
+import { GetStartedSection } from "~/components/landing-page/get-started-section";
+import { HeroSection } from "~/components/landing-page/hero-section";
+import { TestimonialSection } from "~/components/landing-page/testimonial-section";
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center h-screen w-full">
-      <h1 className="text-2xl font-bold">E Commerce Admin Dashboard</h1>
-      <Button>Clcik me</Button>
+    <div>
+      <HeroSection />
+      <AboutSection />
+      <FeatureSection />
+      <TestimonialSection />
+      <GetStartedSection />
     </div>
   );
 }
