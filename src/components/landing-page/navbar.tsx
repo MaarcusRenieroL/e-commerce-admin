@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarIcon, MenuIcon, StoreIcon } from "lucide-react";
+import { CalendarIcon, MenuIcon, MoveRightIcon, StoreIcon } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
 import {
@@ -14,8 +14,13 @@ import { Button } from "~/components/ui/button";
 import { usePathname } from "next/navigation";
 import { LANDING_PAGE_NAVBAR_ROUTES, SIDEBAR_ITEMS } from "~/lib/constants";
 import { cn } from "~/lib/utils";
+import { Session } from "next-auth";
 
-export const Navbar: FC = () => {
+type Props = {
+  session: Session | null;
+};
+
+export const Navbar: FC<Props> = ({ session }) => {
   const pathname = usePathname();
 
   return (
@@ -44,12 +49,23 @@ export const Navbar: FC = () => {
                 {route.title}
               </Link>
             ))}
-            <Link href="/auth/sign-in">
-              <Button variant="outline">Sign In</Button>
-            </Link>
-            <Link href="/auth/sign-up">
-              <Button>Sign Up</Button>
-            </Link>
+            {session ? (
+              <Link href="/dashboard">
+                <Button>
+                  <p>Go to dashbaord</p>
+                  <MoveRightIcon className="h-4 w-4" />
+                </Button>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-8 sm:gap-6">
+                <Link href="/auth/sign-in">
+                  <Button variant="outline">Sign In</Button>
+                </Link>
+                <Link href="/auth/sign-up">
+                  <Button>Sign Up</Button>
+                </Link>
+              </div>
+            )}
           </nav>
         </div>
       </header>
@@ -93,14 +109,25 @@ export const Navbar: FC = () => {
                   </Link>
                 );
               })}
-              <Link className="w-full" href="/auth/sign-in">
-                <Button className="w-full" variant="outline">
-                  Sign In
-                </Button>
-              </Link>
-              <Link className="w-full" href="/auth/sign-up">
-                <Button className="w-full">Sign Up</Button>
-              </Link>
+              {session ? (
+                <Link className="w-full" href="/auth/sign-in">
+                  <Button className="w-full">
+                    <p>Go to dashboard</p>
+                    <MoveRightIcon className="w-4 h-4" />
+                  </Button>
+                </Link>
+              ) : (
+                <div className="space-y-5 mt-10">
+                  <Link className="w-full" href="/auth/sign-in">
+                    <Button className="w-full" variant="outline">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link className="w-full" href="/auth/sign-up">
+                    <Button className="w-full">Sign Up</Button>
+                  </Link>
+                </div>
+              )}
             </div>
           </SheetContent>
         </Sheet>
