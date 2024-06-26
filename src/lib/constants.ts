@@ -86,3 +86,46 @@ export const SIDEBAR_ITEMS: SidebarItemsType[] = [
     icon: Icons.getStarted,
   },
 ];
+
+export const DASHBOARD_SIDEBAR_ITEMS: SidebarItemsType[] = [
+  {
+    title: "Overview",
+    href: "/dashboard",
+    icon: Icons.dashboard,
+  },
+  {
+    title: "Billboards",
+    href: "/billboards",
+    icon: Icons.billboards,
+  },
+  {
+    title: "Categories",
+    href: "/categories",
+    icon: Icons.categories,
+  },
+  {
+    title: "Sizes",
+    href: "/sizes",
+    icon: Icons.sizes,
+  },
+  {
+    title: "Colors",
+    href: "/colors",
+    icon: Icons.colors,
+  },
+  {
+    title: "Products",
+    href: "/products",
+    icon: Icons.product,
+  },
+  {
+    title: "Orders",
+    href: "/orders",
+    icon: Icons.cart,
+  },
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: Icons.settings,
+  },
+];

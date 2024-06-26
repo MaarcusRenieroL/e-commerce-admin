@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { NextAuthProvider } from "./next-auth-provider";
 import { ModalProvider } from "./modal-provider";
 import { UploadThingProvider } from "./upload-thing-provider";
+import { ThemeProvider } from "./next-themes-provider";
 
 type Props = {
   children: ReactNode;
@@ -14,8 +15,15 @@ export const Providers: FC<Props> = ({ children }) => {
     <TRPCProvider>
       <NextAuthProvider>
         <UploadThingProvider />
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster />
+        </ThemeProvider>
         <ModalProvider />
       </NextAuthProvider>
     </TRPCProvider>
